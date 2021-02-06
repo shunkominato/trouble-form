@@ -1,8 +1,9 @@
 import React, { useCallback, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { push } from 'connected-react-router';
-import { TextInput } from '../components/UI';
+// import { push } from 'connected-react-router';
+import { PrimaryButton, TextInput } from '../components/UI';
 import '../assets/css/common.css';
+import { register } from '../reducks/troubleLists/operations';
 
 const From: React.FC = () => {
   const dispatch = useDispatch();
@@ -49,9 +50,6 @@ const From: React.FC = () => {
 
   return (
     <div>
-      <button type="button" onClick={() => dispatch(push('/troubleList'))}>
-        遷移
-      </button>
       <section className="form__container">
         <TextInput
           fullWidth
@@ -106,6 +104,13 @@ const From: React.FC = () => {
           required={false}
           type="text"
           onChange={inputRemark}
+        />
+
+        <PrimaryButton
+          label="登録"
+          onClick={() =>
+            dispatch(register(username, title, backGround, example, remark))
+          }
         />
       </section>
     </div>

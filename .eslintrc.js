@@ -36,6 +36,8 @@ module.exports = {
     'spaced-comment': ['error', 'always', { markers: ['/ <reference'] }],
     'prettier/prettier': 'error',
     'import/prefer-default-export': 'off',
+    'jsx-curly-newline': 'off',
+    "react/jsx-curly-newline": "off"
   },
   settings: {
     'import/resolver': {

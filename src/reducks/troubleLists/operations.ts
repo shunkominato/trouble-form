@@ -17,3 +17,23 @@ export const asyncIncrement: ActionCreator<
     dispatch(push('/'));
   };
 };
+
+export const register: ActionCreator<
+  ThunkAction<void, RootState, undefined, CounterActionTypes>
+> = (
+  username: string,
+  title: string,
+  backGround: string,
+  example: string,
+  remark: string
+) => {
+  return (dispatch: Dispatch) => {
+    console.log(username);
+    console.log(backGround);
+    console.log(title);
+    console.log(example);
+    console.log(remark);
+    alert('登録しました');
+    dispatch(push('/'));
+  };
+};
