@@ -4,7 +4,7 @@ import { push } from 'connected-react-router';
 import { Link } from 'react-router-dom';
 import { Path } from '../Router';
 
-const From = () => {
+const From: React.FC = () => {
   const dispatch = useDispatch();
   return (
     <div>

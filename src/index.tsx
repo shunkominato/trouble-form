@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 // import { createBrowserHistory } from 'history';
 // import { ConnectedRouter } from 'connected-react-router';
-import store from './store';
+import store from './reducks/store';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
