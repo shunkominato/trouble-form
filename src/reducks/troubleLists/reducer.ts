@@ -10,10 +10,9 @@ export const countReducer = (
   action: CounterActionTypes
 ): Count => {
   switch (action.type) {
-    case ActionTypes.increment: // action.type === "INCREMENT"
-      return { value: state.value + 1 }; // value に1足す
+    case ActionTypes.increment:
+      return { value: state.value + 1 };
     case ActionTypes.decrement:
-      // 0以下にはならない
       return { value: state.value === 0 ? 0 : state.value - 1 };
     case ActionTypes.countReset:
       return { value: 0 };

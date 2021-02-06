@@ -6,6 +6,7 @@ import {
   incrementAction,
   resetAction,
 } from '../reducks/troubleLists/actions';
+import { asyncIncrement } from '../reducks/troubleLists/operations';
 // import fetchTroubleLists from '../reducks/troubleLists/operations';
 import { RootState } from '../reducks/store';
 
@@ -23,6 +24,9 @@ const TroubleList = () => {
       </button>
       <button type="button" onClick={() => dispatch(resetAction())}>
         reset
+      </button>
+      <button type="button" onClick={() => dispatch(asyncIncrement())}>
+        async
       </button>
       <p>{currentCount.value}</p>
     </>
