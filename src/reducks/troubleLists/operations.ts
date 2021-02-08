@@ -2,9 +2,10 @@ import { Dispatch, ActionCreator } from 'redux';
 import { ThunkAction } from 'redux-thunk';
 import { push } from 'connected-react-router';
 import ActionTypes from '../actionTypes';
-import { CounterActionTypes } from './types';
+import { CounterActionTypes, Troble } from './types';
 import { RootState } from '../store';
 import { db, FirebaseTimeStamp } from '../../firebase';
+import firebase from 'firebase/app';
 
 export const asyncIncrement: ActionCreator<
   ThunkAction<void, RootState, string, CounterActionTypes>
@@ -39,13 +40,33 @@ export const register: ActionCreator<
       created_at: timestamp,
       updated_at: timestamp,
     };
-    console.log(username);
-    console.log(backGround);
-    console.log(title);
-    console.log(example);
-    console.log(remark);
+
     db.collection('troubles').doc().set(data, { merge: true });
     alert('登録しました');
     dispatch(push('/'));
+  };
+};
+
+export const fetchTroubleLists: ActionCreator<
+  ThunkAction<void, RootState, undefined, CounterActionTypes>
+> = () => {
+  return (dispatch: Dispatch) => {
+    db.collection('troubles')
+      .doc()
+      .get()
+      .then(() => {
+        const troubleLists = [];
+        (snapshots: firebase.firestore.QuerySnapshot) => {
+          snapshots.forEach(
+            (
+              snapshot: firebase.firestore.QueryDocumentSnapshot<firebase.firestore.DocumentData>
+            ) => {
+              const trouble = snapshot.data();
+              troubleLists.push(trouble);
+            }
+          );
+        };
+        dispatch;
+      });
   };
 };

@@ -1,5 +1,5 @@
 import ActionTypes from '../actionTypes';
-import { CounterActionTypes } from './types';
+import { CounterActionTypes, Troble } from './types';
 
 export const incrementAction = (): CounterActionTypes => {
   return {
@@ -16,5 +16,12 @@ export const decrementAction = (): CounterActionTypes => {
 export const resetAction = (): CounterActionTypes => {
   return {
     type: ActionTypes.countReset,
+  };
+};
+
+export const fetchTorablesAction = (troubles: Troble[]) => {
+  return {
+    type: ActionTypes.fetchTroubleLists,
+    payload: troubles,
   };
 };
