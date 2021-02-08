@@ -4,6 +4,7 @@ import { push } from 'connected-react-router';
 import ActionTypes from '../actionTypes';
 import { CounterActionTypes } from './types';
 import { RootState } from '../store';
+import { db, FirebaseTimeStamp } from '../../firebase';
 
 export const asyncIncrement: ActionCreator<
   ThunkAction<void, RootState, string, CounterActionTypes>
@@ -28,11 +29,22 @@ export const register: ActionCreator<
   remark: string
 ) => {
   return (dispatch: Dispatch) => {
+    const timestamp = FirebaseTimeStamp.now();
+    const data = {
+      username,
+      title,
+      backGround,
+      example,
+      remark,
+      created_at: timestamp,
+      updated_at: timestamp,
+    };
     console.log(username);
     console.log(backGround);
     console.log(title);
     console.log(example);
     console.log(remark);
+    db.collection('troubles').doc().set(data, { merge: true });
     alert('登録しました');
     dispatch(push('/'));
   };

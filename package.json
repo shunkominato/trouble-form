@@ -17,6 +17,7 @@
     "@types/react-router-dom": "^5.1.7",
     "@types/redux-thunk": "^2.1.0",
     "connected-react-router": "^6.8.0",
+    "firebase": "^8.2.6",
     "history": "4.10.1",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
@@ -37,12 +38,6 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "format": "prettier --write ./src/*"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
   },
   "browserslist": {
     "production": [
