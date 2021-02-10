@@ -2,13 +2,13 @@ import { connectRouter, routerMiddleware } from 'connected-react-router';
 import { combineReducers, createStore, applyMiddleware } from 'redux';
 import * as History from 'history';
 import thunk from 'redux-thunk';
-import { countReducer } from './troubleLists/reducer';
+import { troublesReducer } from './troubleLists/reducer';
 
 export const history = History.createBrowserHistory();
 
 const rootReducer = combineReducers({
   router: connectRouter(history),
-  counter: countReducer,
+  troubles: troublesReducer,
 });
 
 export type RootState = ReturnType<typeof rootReducer>;

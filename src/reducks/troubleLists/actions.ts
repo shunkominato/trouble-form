@@ -1,25 +1,9 @@
 import ActionTypes from '../actionTypes';
-import { CounterActionTypes, Troble } from './types';
+import { Trouble, TroubleActionTypes } from './types';
 
-export const incrementAction = (): CounterActionTypes => {
-  return {
-    type: ActionTypes.increment, // "INCREMENT"
-  };
-};
-
-export const decrementAction = (): CounterActionTypes => {
-  return {
-    type: ActionTypes.decrement,
-  };
-};
-
-export const resetAction = (): CounterActionTypes => {
-  return {
-    type: ActionTypes.countReset,
-  };
-};
-
-export const fetchTorablesAction = (troubles: Troble[]) => {
+export const fetchTorablesAction = (
+  troubles: Trouble[]
+): TroubleActionTypes => {
   return {
     type: ActionTypes.fetchTroubleLists,
     payload: troubles,

@@ -1,27 +1,17 @@
 import { Dispatch, ActionCreator } from 'redux';
 import { ThunkAction } from 'redux-thunk';
 import { push } from 'connected-react-router';
-import ActionTypes from '../actionTypes';
-import { CounterActionTypes, Troble } from './types';
+import firebase from 'firebase/app';
+// import ActionTypes from '../actionTypes';
+import { TroubleActionTypes, Trouble } from './types';
 import { RootState } from '../store';
 import { db, FirebaseTimeStamp } from '../../firebase';
-import firebase from 'firebase/app';
+import { fetchTorablesAction } from './actions';
 
-export const asyncIncrement: ActionCreator<
-  ThunkAction<void, RootState, string, CounterActionTypes>
-> = () => {
-  return (dispatch: Dispatch, getState) => {
-    console.log(getState().counter.value);
-    setTimeout(() => {
-      dispatch({ type: ActionTypes.increment });
-    }, 3000);
-    console.log('ss');
-    dispatch(push('/'));
-  };
-};
+const troubleRef = db.collection('troubles');
 
 export const register: ActionCreator<
-  ThunkAction<void, RootState, undefined, CounterActionTypes>
+  ThunkAction<void, RootState, undefined, TroubleActionTypes>
 > = (
   username: string,
   title: string,
@@ -31,7 +21,11 @@ export const register: ActionCreator<
 ) => {
   return (dispatch: Dispatch) => {
     const timestamp = FirebaseTimeStamp.now();
+
+    const ref = troubleRef.doc();
+
     const data = {
+      id: ref.id,
       username,
       title,
       backGround,
@@ -41,32 +35,31 @@ export const register: ActionCreator<
       updated_at: timestamp,
     };
 
-    db.collection('troubles').doc().set(data, { merge: true });
+    db.collection('troubles').doc(ref.id).set(data, { merge: true });
     alert('登録しました');
     dispatch(push('/'));
   };
 };
 
 export const fetchTroubleLists: ActionCreator<
-  ThunkAction<void, RootState, undefined, CounterActionTypes>
+  ThunkAction<void, RootState, undefined, TroubleActionTypes>
 > = () => {
   return (dispatch: Dispatch) => {
-    db.collection('troubles')
-      .doc()
-      .get()
-      .then(() => {
-        const troubleLists = [];
-        (snapshots: firebase.firestore.QuerySnapshot) => {
-          snapshots.forEach(
-            (
-              snapshot: firebase.firestore.QueryDocumentSnapshot<firebase.firestore.DocumentData>
-            ) => {
-              const trouble = snapshot.data();
-              troubleLists.push(trouble);
-            }
-          );
-        };
-        dispatch;
-      });
+    db.collection('troubles').onSnapshot(
+      (
+        snapshots: firebase.firestore.QuerySnapshot<firebase.firestore.DocumentData>
+      ) => {
+        const troubleLists: Trouble[] = [];
+        snapshots.forEach(
+          (
+            snapshot: firebase.firestore.QueryDocumentSnapshot<firebase.firestore.DocumentData>
+          ) => {
+            const trouble = snapshot.data() as Trouble;
+            troubleLists.push(trouble);
+          }
+        );
+        dispatch(fetchTorablesAction(troubleLists));
+      }
+    );
   };
 };

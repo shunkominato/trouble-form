@@ -1,14 +1,15 @@
 import ActionTypes from '../actionTypes';
-import { TroubleState, CounterActionTypes } from './types';
+import { TroubleState, TroubleActionTypes } from './types';
 
 const initialState: TroubleState = {
   troubles: [],
 };
 
-export const countReducer = (
+export const troublesReducer = (
   state = initialState,
-  action: CounterActionTypes
+  action: TroubleActionTypes
 ): TroubleState => {
+  console.log(action);
   switch (action.type) {
     case ActionTypes.fetchTroubleLists:
       return {

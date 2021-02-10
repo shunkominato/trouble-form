@@ -38,7 +38,11 @@ const Header = () => {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" className={classes.title}>
+          <Typography
+            variant="h6"
+            className={classes.title}
+            onClick={() => dispatch(push('/'))}
+          >
             悩み
           </Typography>
           <Button

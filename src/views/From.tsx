@@ -50,7 +50,7 @@ const From: React.FC = () => {
 
   return (
     <div>
-      <section className="form__container">
+      <section className="container">
         <TextInput
           fullWidth
           label="投稿者"
