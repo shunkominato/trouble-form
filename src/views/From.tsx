@@ -106,12 +106,14 @@ const From: React.FC = () => {
           onChange={inputRemark}
         />
 
-        <PrimaryButton
-          label="登録"
-          onClick={() =>
-            dispatch(register(username, title, backGround, example, remark))
-          }
-        />
+        <div className="btn-container">
+          <PrimaryButton
+            label="登録"
+            onClick={() =>
+              dispatch(register(username, title, backGround, example, remark))
+            }
+          />
+        </div>
       </section>
     </div>
   );

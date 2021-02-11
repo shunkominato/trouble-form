@@ -5,3 +5,7 @@
   height: auto;
   width: calc(100% - 2rem);
 }
+
+.btn-container{
+  text-align: right;
+}

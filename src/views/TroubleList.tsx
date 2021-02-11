@@ -42,7 +42,7 @@ const StyledTableRow = withStyles((theme: Theme) =>
 
 const useStyles = makeStyles({
   container: {
-    width: 300,
+    paddingTop: 24,
   },
   table: {
     width: '100%',
