@@ -6,6 +6,10 @@
   width: calc(100% - 2rem);
 }
 
-.btn-container{
+.btn-container {
   text-align: right;
+}
+
+.datail__h3 {
+  border-bottom: solid 1px red；;
 }

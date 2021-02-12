@@ -1,23 +1,24 @@
 import React, { useEffect, useState } from 'react';
 // import { useDispatch } from 'react-redux';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+// import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import { db } from '../firebase';
 import '../assets/css/common.css';
+import { Trouble } from '../reducks/troubleLists/types';
 // import { Troble } from '../reducks/troubleLists/types';
 
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    root: {
-      '& > *': {
-        margin: theme.spacing(1),
-      },
-    },
-  })
-);
+// const useStyles = makeStyles((theme: Theme) =>
+//   createStyles({
+//     root: {
+//       '& > *': {
+//         margin: theme.spacing(1),
+//       },
+//     },
+//   })
+// );
 
 const TroubleDetail = () => {
-  const classes = useStyles();
+  // const classes = useStyles();
   // const dispatch = useDispatch();
   console.log(window.location.pathname);
   console.log('detail');
@@ -42,20 +43,8 @@ const TroubleDetail = () => {
       .doc(id)
       .get()
       .then((doc) => {
-        const data = doc.data();
-        if (data) {
-          console.log(data);
-          setTrouble({
-            id: data.id,
-            username: data.username,
-            title: data.title,
-            backGround: data.backGround,
-            example: data.example,
-            remark: data.remark,
-            created_at: data.created_at,
-            updated_at: data.updated_at,
-          });
-        }
+        const data = doc.data() as Trouble;
+        setTrouble(data);
       });
   }, []);
 
@@ -68,18 +57,24 @@ const TroubleDetail = () => {
 
         <p>{trouble.username}</p>
         <div>
-          <h3>背景</h3>
+          <u>
+            <h3 className="datail__h3">背景</h3>
+          </u>
           <p>{trouble.backGround}</p>
         </div>
         <div>
-          <h3>サービス例</h3>
+          <u>
+            <h3 className="datail__h3">サービス例</h3>
+          </u>
           <p>{trouble.example}</p>
         </div>
         <div>
-          <h3>備考</h3>
+          <u>
+            <h3 className="datail__h3">備考</h3>
+          </u>
           <p>{trouble.remark}</p>
         </div>
-        <div className={classes.root}>
+        <div className="btn-container">
           <Button variant="outlined" color="primary">
             ブレインストーミング
           </Button>
