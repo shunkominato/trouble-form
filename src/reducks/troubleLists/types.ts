@@ -4,6 +4,8 @@ import ActionTypes from '../actionTypes';
 export type Trouble = {
   id: string;
   username: string;
+  age: number;
+  business: string;
   title: string;
   backGround: string;
   example: string;

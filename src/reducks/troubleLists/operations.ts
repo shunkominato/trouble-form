@@ -14,6 +14,8 @@ export const register: ActionCreator<
   ThunkAction<void, RootState, undefined, TroubleActionTypes>
 > = (
   username: string,
+  age: number,
+  business: string,
   title: string,
   backGround: string,
   example: string,
@@ -27,6 +29,8 @@ export const register: ActionCreator<
     const data = {
       id: ref.id,
       username,
+      age,
+      business,
       title,
       backGround,
       example,
@@ -37,7 +41,7 @@ export const register: ActionCreator<
 
     db.collection('troubles').doc(ref.id).set(data, { merge: true });
     alert('登録しました');
-    dispatch(push('/'));
+    dispatch(push('/troubleList'));
   };
 };
 

@@ -61,9 +61,6 @@ const ClosableDrawer = (props: Props) => {
     onClose();
   };
 
-  console.log(open);
-  console.log(onClose);
-
   return (
     <nav className={classes.drawer}>
       <Drawer

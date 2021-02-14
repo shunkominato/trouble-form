@@ -20,8 +20,6 @@ import { Trouble } from '../reducks/troubleLists/types';
 const TroubleDetail = () => {
   // const classes = useStyles();
   // const dispatch = useDispatch();
-  console.log(window.location.pathname);
-  console.log('detail');
   const id = window.location.pathname
     .split('troubleList/detail')[1]
     .split('/')[1];
@@ -29,6 +27,8 @@ const TroubleDetail = () => {
   const [trouble, setTrouble] = useState({
     id: '',
     username: '',
+    age: 0,
+    business: '',
     title: '',
     backGround: '',
     example: '',
@@ -55,7 +55,9 @@ const TroubleDetail = () => {
           <h2>{trouble.title}</h2>
         </div>
 
-        <p>{trouble.username}</p>
+        <p>{`投稿者 : ${trouble.username}`}</p>
+        <p>{`年齢 : ${trouble.age}`}</p>
+        <p>{`職業 : ${trouble.business}`}</p>
         <div>
           <u>
             <h3 className="datail__h3">背景</h3>
