@@ -1,11 +1,23 @@
-import { reducerWithInitialState } from 'typescript-fsa-reducers';
+import ActionTypes from '../actionTypes';
+import { TroubleState, TroubleActionTypes } from './types';
 
-export interface State {
-  lists: [];
-}
-
-export const initialState: State = {
-  lists: [],
+const initialState: TroubleState = {
+  troubles: [],
 };
 
-export const Reducer = reducerWithInitialState(initialState);
+export const troublesReducer = (
+  state = initialState,
+  action: TroubleActionTypes
+): TroubleState => {
+  console.log(action);
+  switch (action.type) {
+    case ActionTypes.fetchTroubleLists:
+      return {
+        ...state,
+        troubles: [...action.payload],
+      };
+    default:
+      // const _: never = action;
+      return state;
+  }
+};

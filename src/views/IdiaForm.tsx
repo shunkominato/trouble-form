@@ -1,26 +1,22 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 // import { push } from 'connected-react-router';
-import Radio from '@material-ui/core/Radio';
-import RadioGroup from '@material-ui/core/RadioGroup';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import FormControl from '@material-ui/core/FormControl';
-import FormLabel from '@material-ui/core/FormLabel';
 import { PrimaryButton, TextInput } from '../components/UI';
 import '../assets/css/common.css';
 import { register } from '../reducks/troubleLists/operations';
 
-const From: React.FC = () => {
+const IdiaForm = () => {
   const dispatch = useDispatch();
   const [username, setUsername] = useState('');
   const [age, setAge] = useState(0);
-  const [gender, setGender] = useState('');
-  const [trouble, setTrouble] = useState('');
+  const [business, setBusiness] = useState('');
+  const [title, setTitle] = useState('');
   const [backGround, setBackGround] = useState('');
+  const [example, setExample] = useState('');
   const [remark, setRemark] = useState('');
 
   const [usernameError, setUsernameError] = useState('');
-  const [troubleError, setTroubleError] = useState('');
+  const [titleError, setTitleError] = useState('');
   const [backGroundError, setBackGroundError] = useState('');
 
   const inputUsername = useCallback(
@@ -37,11 +33,18 @@ const From: React.FC = () => {
     [setAge]
   );
 
-  const inputGender = useCallback(
+  const inputBusiness = useCallback(
     (event) => {
-      setGender(event.target.value);
+      setBusiness(event.target.value);
     },
-    [setGender]
+    [setBusiness]
+  );
+
+  const inputTitle = useCallback(
+    (event) => {
+      setTitle(event.target.value);
+    },
+    [setTitle]
   );
 
   const inputBackGround = useCallback(
@@ -51,11 +54,11 @@ const From: React.FC = () => {
     [setBackGround]
   );
 
-  const inputTrouble = useCallback(
+  const inputExample = useCallback(
     (event) => {
-      setTrouble(event.target.value);
+      setExample(event.target.value);
     },
-    [setTrouble]
+    [setExample]
   );
 
   const inputRemark = useCallback(
@@ -65,25 +68,43 @@ const From: React.FC = () => {
     [setRemark]
   );
 
+  useEffect(() => {
+    const param = window.location.pathname.split('idiaForm')[1].split('/')[1];
+    setTitle(decodeURI(param));
+  }, []);
+
   const submit = (): void => {
     const userErrorMsg = !username ? '必須項目です' : '';
     setUsernameError(userErrorMsg);
-    const troubleErrorMsg = !trouble ? '必須項目です' : '';
-    setTroubleError(troubleErrorMsg);
+    const titleErrorMsg = !title ? '必須項目です' : '';
+    setTitleError(titleErrorMsg);
     const backGroundErrorMsg = !backGround ? '必須項目です' : '';
     setBackGroundError(backGroundErrorMsg);
 
-    if (userErrorMsg || troubleErrorMsg || backGroundErrorMsg) {
+    if (userErrorMsg || titleErrorMsg || backGroundErrorMsg) {
       alert('入力エラー');
       window.scrollTo(0, 0);
       return;
     }
-    dispatch(register(username, age, gender, trouble, backGround, remark));
+    dispatch(
+      register(username, age, business, title, backGround, example, remark)
+    );
   };
-
   return (
     <div>
       <section className="container">
+        <TextInput
+          fullWidth
+          label="表題(必須)"
+          multiline={false}
+          rows={1}
+          value={title}
+          required={false}
+          type="text"
+          error={titleError}
+          onChange={inputTitle}
+        />
+
         <TextInput
           fullWidth
           label="投稿者(必須)"
@@ -108,31 +129,16 @@ const From: React.FC = () => {
           onChange={inputAge}
         />
 
-        <div className="input__div">
-          <FormControl component="fieldset">
-            <FormLabel component="legend">性別</FormLabel>
-            <RadioGroup
-              aria-label="gender"
-              name="gender1"
-              value={gender}
-              onChange={inputGender}
-            >
-              <FormControlLabel value="男" control={<Radio />} label="男" />
-              <FormControlLabel value="女" control={<Radio />} label="女" />
-            </RadioGroup>
-          </FormControl>
-        </div>
-
         <TextInput
           fullWidth
-          label="悩み(必須)"
-          multiline
-          rows={10}
-          value={trouble}
+          label="職業"
+          multiline={false}
+          rows={1}
+          value={business}
           required={false}
           type="text"
-          error={troubleError}
-          onChange={inputTrouble}
+          error=""
+          onChange={inputBusiness}
         />
 
         <TextInput
@@ -145,6 +151,18 @@ const From: React.FC = () => {
           type="text"
           error={backGroundError}
           onChange={inputBackGround}
+        />
+
+        <TextInput
+          fullWidth
+          label="サービス例"
+          multiline
+          rows={10}
+          value={example}
+          required={false}
+          type="text"
+          error=""
+          onChange={inputExample}
         />
 
         <TextInput
@@ -167,4 +185,4 @@ const From: React.FC = () => {
   );
 };
 
-export default From;
+export default IdiaForm;

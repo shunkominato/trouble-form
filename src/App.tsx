@@ -1,12 +1,16 @@
 import React from 'react';
 import './App.css';
+import Header from './components/Header/Header';
 import Router from './Router';
 
 const App: React.FC = () => {
   return (
-    <main>
-      <Router />
-    </main>
+    <>
+      <Header />
+      <main>
+        <Router />
+      </main>
+    </>
   );
 };
 

@@ -34,7 +34,10 @@ module.exports = {
     ],
     'react/prop-types': 'off',
     'spaced-comment': ['error', 'always', { markers: ['/ <reference'] }],
-    'prettier/prettier': 'error', 
+    'prettier/prettier': 'error',
+    'import/prefer-default-export': 'off',
+    'jsx-curly-newline': 'off',
+    "react/jsx-curly-newline": "off"
   },
   settings: {
     'import/resolver': {

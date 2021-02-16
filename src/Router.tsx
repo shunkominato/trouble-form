@@ -1,6 +1,13 @@
 import React from 'react';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import { Form, TroubleList } from './views';
+import { Route, Switch } from 'react-router-dom';
+import {
+  Form,
+  TroubleList,
+  TroubleDetail,
+  SignIn,
+  Menu,
+  IdiaForm,
+} from './views';
 
 export const Path = {
   Form: '/',
@@ -10,12 +17,14 @@ export const Path = {
 const Router = () => {
   return (
     <>
-      <BrowserRouter>
-        <Switch>
-          <Route exact path="(/)?" component={Form} />
-          <Route exact path="/troubleList" component={TroubleList} />
-        </Switch>
-      </BrowserRouter>
+      <Switch>
+        <Route exact path="(/)?" component={Form} />
+        <Route exact path="/signIn" component={SignIn} />
+        <Route exact path="/menu" component={Menu} />
+        <Route exact path="/troubleList" component={TroubleList} />
+        <Route exact path="/troubleList/detail/:id" component={TroubleDetail} />
+        <Route exact path="/idiaForm/:title" component={IdiaForm} />
+      </Switch>
     </>
   );
 };
