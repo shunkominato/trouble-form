@@ -1,6 +1,7 @@
 import React from 'react';
 import TextField from '@material-ui/core/TextField';
 // import { useForm } from 'react-hook-form';
+import '../../assets/css/common.css';
 
 type Props = {
   fullWidth: boolean;
@@ -27,20 +28,22 @@ const TextInput = (props: Props) => {
     onChange,
   } = props;
   return (
-    <TextField
-      error={!!error}
-      helperText={error}
-      variant={error ? 'filled' : 'standard'}
-      fullWidth={fullWidth}
-      label={label}
-      margin="dense"
-      multiline={multiline}
-      required={required}
-      rows={rows}
-      value={value}
-      type={type}
-      onChange={onChange}
-    />
+    <div className="input__div">
+      <TextField
+        error={!!error}
+        helperText={error}
+        variant={error ? 'filled' : 'standard'}
+        fullWidth={fullWidth}
+        label={label}
+        margin="dense"
+        multiline={multiline}
+        required={required}
+        rows={rows}
+        value={value}
+        type={type}
+        onChange={onChange}
+      />
+    </div>
   );
 };
 
