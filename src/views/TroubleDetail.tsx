@@ -78,7 +78,7 @@ const TroubleDetail = () => {
         </div>
         <div className="btn-container">
           <Button variant="outlined" color="primary">
-            ブレインストーミング
+            ビジネスアイディア投稿
           </Button>
         </div>
       </div>

@@ -53,7 +53,7 @@ const ClosableDrawer = (props: Props) => {
 
   const pages: Page[] = [
     { label: 'トップ', value: '/' },
-    { label: '一覧', value: '/troubleList' },
+    { label: '管理メニュー', value: '/signIn' },
   ];
 
   const onClickList = (url: string): void => {
