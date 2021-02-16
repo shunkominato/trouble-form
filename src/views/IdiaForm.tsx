@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 // import { push } from 'connected-react-router';
 import { PrimaryButton, TextInput } from '../components/UI';
@@ -68,6 +68,11 @@ const IdiaForm = () => {
     [setRemark]
   );
 
+  useEffect(() => {
+    const param = window.location.pathname.split('idiaForm')[1].split('/')[1];
+    setTitle(decodeURI(param));
+  }, []);
+
   const submit = (): void => {
     const userErrorMsg = !username ? '必須項目です' : '';
     setUsernameError(userErrorMsg);
@@ -88,6 +93,18 @@ const IdiaForm = () => {
   return (
     <div>
       <section className="container">
+        <TextInput
+          fullWidth
+          label="表題(必須)"
+          multiline={false}
+          rows={1}
+          value={title}
+          required={false}
+          type="text"
+          error={titleError}
+          onChange={inputTitle}
+        />
+
         <TextInput
           fullWidth
           label="投稿者(必須)"
@@ -122,18 +139,6 @@ const IdiaForm = () => {
           type="text"
           error=""
           onChange={inputBusiness}
-        />
-
-        <TextInput
-          fullWidth
-          label="表題(必須)"
-          multiline={false}
-          rows={1}
-          value={title}
-          required={false}
-          type="text"
-          error={titleError}
-          onChange={inputTitle}
         />
 
         <TextInput

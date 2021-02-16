@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-// import { useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { push } from 'connected-react-router';
 // import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import { db } from '../firebase';
@@ -19,7 +20,7 @@ import { Trouble } from '../reducks/troubleLists/types';
 
 const TroubleDetail = () => {
   // const classes = useStyles();
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
   const id = window.location.pathname
     .split('troubleList/detail')[1]
     .split('/')[1];
@@ -77,7 +78,11 @@ const TroubleDetail = () => {
           <p>{trouble.remark}</p>
         </div>
         <div className="btn-container">
-          <Button variant="outlined" color="primary">
+          <Button
+            variant="outlined"
+            color="primary"
+            onClick={() => dispatch(push(`/idiaForm/${trouble.title}`))}
+          >
             ビジネスアイディア投稿
           </Button>
         </div>
