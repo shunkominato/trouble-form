@@ -85,7 +85,7 @@ const TroubleDetail = () => {
           <Button
             variant="outlined"
             color="primary"
-            onClick={() => dispatch(push(`/idiaForm/${trouble.trouble}`))}
+            onClick={() => dispatch(push(`/idiaForm/${id}/${trouble.trouble}`))}
           >
             ビジネスアイディア投稿
           </Button>

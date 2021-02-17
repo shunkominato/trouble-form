@@ -4,3 +4,5 @@ export { default as Menu } from './Menu';
 export { default as TroubleList } from './TroubleList';
 export { default as TroubleDetail } from './TroubleDetail';
 export { default as IdiaForm } from './IdiaForm';
+export { default as IdiaList } from './IdiaList';
+export { default as IdiaDetail } from './IdiaDetail';

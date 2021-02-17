@@ -8,21 +8,30 @@ import { RootState } from '../store';
 import { db, FirebaseTimeStamp } from '../../firebase';
 import { fetchIdiaAction } from './actions';
 
-const troubleRef = db.collection('troubles');
+const idiaRef = db.collection('idias');
 
 export const register: ActionCreator<
   ThunkAction<void, RootState, undefined, IdiaActionTypes>
-> = (troubleId: string, username: string, example: string, remark: string) => {
+> = (
+  troubleId: string,
+  title: string,
+  username: string,
+  target: string,
+  example: string,
+  remark: string
+) => {
   return async (dispatch: Dispatch) => {
     console.log('komikomi');
     const timestamp = FirebaseTimeStamp.now();
 
-    const ref = troubleRef.doc();
+    const ref = idiaRef.doc();
 
     const data = {
       id: ref.id,
       trouble_id: troubleId,
+      title,
       username,
+      target,
       example,
       remark,
       created_at: timestamp,
@@ -35,7 +44,7 @@ export const register: ActionCreator<
   };
 };
 
-export const fetchTroubleLists: ActionCreator<
+export const fetchIdiaLists: ActionCreator<
   ThunkAction<void, RootState, undefined, IdiaActionTypes>
 > = () => {
   return (dispatch: Dispatch) => {

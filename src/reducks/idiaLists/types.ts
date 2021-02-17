@@ -7,6 +7,7 @@ export type Idia = {
   trouble: string;
   title: string;
   username: string;
+  target: string;
   example: string;
   remark: string;
   created_at: string;
