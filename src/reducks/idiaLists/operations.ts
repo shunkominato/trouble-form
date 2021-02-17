@@ -8,7 +8,7 @@ import { RootState } from '../store';
 import { db, FirebaseTimeStamp } from '../../firebase';
 import { fetchIdiaAction } from './actions';
 
-const idiaRef = db.collection('idias');
+// const idiaRef = db.collection('idias');
 
 export const register: ActionCreator<
   ThunkAction<void, RootState, undefined, IdiaActionTypes>
@@ -24,11 +24,13 @@ export const register: ActionCreator<
     console.log('komikomi');
     const timestamp = FirebaseTimeStamp.now();
 
-    const ref = idiaRef.doc();
-
+    const ref = db
+      .collection('troubles')
+      .doc(troubleId)
+      .collection('idia')
+      .doc();
     const data = {
       id: ref.id,
-      trouble_id: troubleId,
       title,
       username,
       target,
@@ -38,9 +40,18 @@ export const register: ActionCreator<
       updated_at: timestamp,
     };
 
-    await db.collection('idias').doc(ref.id).set(data, { merge: true });
-    alert('投稿しました');
-    dispatch(push('/menu'));
+    try {
+      await db
+        .collection('troubles')
+        .doc(troubleId)
+        .collection('idias')
+        .doc(ref.id)
+        .set(data, { merge: true });
+      alert('投稿しました');
+      dispatch(push('/menu'));
+    } catch (e) {
+      console.log(e);
+    }
   };
 };
 
