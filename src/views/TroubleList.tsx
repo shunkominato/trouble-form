@@ -79,7 +79,7 @@ const TroubleList = () => {
                       dispatch(push(`troubleList/detail/${trouble.id}`))
                     }
                   >
-                    {trouble.title}
+                    {trouble.trouble}
                   </StyledTableCell>
                   <StyledTableCell align="right">
                     {trouble.username}

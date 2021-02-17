@@ -14,7 +14,7 @@ const From: React.FC = () => {
   const dispatch = useDispatch();
   const [username, setUsername] = useState('');
   const [age, setAge] = useState(0);
-  const [gender, setGender] = useState('');
+  const [gender, setGender] = useState('男');
   const [trouble, setTrouble] = useState('');
   const [backGround, setBackGround] = useState('');
   const [remark, setRemark] = useState('');
@@ -79,6 +79,12 @@ const From: React.FC = () => {
       return;
     }
     dispatch(register(username, age, gender, trouble, backGround, remark));
+
+    setUsername('');
+    setAge(0);
+    setTrouble('');
+    setBackGround('');
+    setRemark('');
   };
 
   return (
@@ -160,7 +166,7 @@ const From: React.FC = () => {
         />
 
         <div className="btn-container">
-          <PrimaryButton label="登録" onClick={submit} />
+          <PrimaryButton label="投稿" onClick={submit} />
         </div>
       </section>
     </div>

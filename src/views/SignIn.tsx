@@ -59,7 +59,7 @@ const SignIn = () => {
       />
 
       <div className="btn-container">
-        <PrimaryButton label="登録" onClick={submit} />
+        <PrimaryButton label="サインイン" onClick={submit} />
       </div>
     </div>
   );

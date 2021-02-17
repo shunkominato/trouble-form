@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 // import { push } from 'connected-react-router';
 import { PrimaryButton, TextInput } from '../components/UI';
 import '../assets/css/common.css';
-import { register } from '../reducks/troubleLists/operations';
+import { register } from '../reducks/idiaLists/operations';
 
 const IdiaForm = () => {
   const dispatch = useDispatch();
@@ -178,7 +178,7 @@ const IdiaForm = () => {
         />
 
         <div className="btn-container">
-          <PrimaryButton label="登録" onClick={submit} />
+          <PrimaryButton label="投稿" onClick={submit} />
         </div>
       </section>
     </div>

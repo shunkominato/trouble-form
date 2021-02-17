@@ -5,10 +5,10 @@ export type Trouble = {
   id: string;
   username: string;
   age: number;
+  gender: string;
   business: string;
-  title: string;
+  trouble: string;
   backGround: string;
-  example: string;
   remark: string;
   created_at: string;
   updated_at: string;
