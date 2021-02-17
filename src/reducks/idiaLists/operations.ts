@@ -3,64 +3,65 @@ import { ThunkAction } from 'redux-thunk';
 import { push } from 'connected-react-router';
 import firebase from 'firebase/app';
 // import ActionTypes from '../actionTypes';
-import { TroubleActionTypes, Trouble } from './types';
+import { Idia, IdiaActionTypes } from './types';
 import { RootState } from '../store';
 import { db, FirebaseTimeStamp } from '../../firebase';
-import { fetchTorablesAction } from './actions';
+import { fetchIdiaAction } from './actions';
 
-const troubleRef = db.collection('troubles');
+const idiaRef = db.collection('idias');
 
 export const register: ActionCreator<
-  ThunkAction<void, RootState, undefined, TroubleActionTypes>
+  ThunkAction<void, RootState, undefined, IdiaActionTypes>
 > = (
+  troubleId: string,
+  title: string,
   username: string,
-  age: number,
-  gender: string,
-  trouble: string,
-  backGround: string,
+  target: string,
+  example: string,
   remark: string
 ) => {
   return async (dispatch: Dispatch) => {
+    console.log('komikomi');
     const timestamp = FirebaseTimeStamp.now();
 
-    const ref = troubleRef.doc();
+    const ref = idiaRef.doc();
 
     const data = {
       id: ref.id,
+      trouble_id: troubleId,
+      title,
       username,
-      age,
-      gender,
-      trouble,
-      backGround,
+      target,
+      example,
       remark,
       created_at: timestamp,
       updated_at: timestamp,
     };
 
-    await db.collection('troubles').doc(ref.id).set(data, { merge: true });
+    await db.collection('idias').doc(ref.id).set(data, { merge: true });
     alert('投稿しました');
-    dispatch(push('/'));
+    dispatch(push('/menu'));
   };
 };
 
-export const fetchTroubleLists: ActionCreator<
-  ThunkAction<void, RootState, undefined, TroubleActionTypes>
+export const fetchIdiaLists: ActionCreator<
+  ThunkAction<void, RootState, undefined, IdiaActionTypes>
 > = () => {
   return (dispatch: Dispatch) => {
-    db.collection('troubles').onSnapshot(
+    db.collection('idias').onSnapshot(
       (
         snapshots: firebase.firestore.QuerySnapshot<firebase.firestore.DocumentData>
       ) => {
-        const troubleLists: Trouble[] = [];
+        const idiaLists: Idia[] = [];
         snapshots.forEach(
           (
             snapshot: firebase.firestore.QueryDocumentSnapshot<firebase.firestore.DocumentData>
           ) => {
-            const trouble = snapshot.data() as Trouble;
-            troubleLists.push(trouble);
+            const idia = snapshot.data() as Idia;
+            idiaLists.push(idia);
           }
         );
-        dispatch(fetchTorablesAction(troubleLists));
+        dispatch(fetchIdiaAction(idiaLists));
       }
     );
   };

@@ -3,42 +3,21 @@ import { useDispatch } from 'react-redux';
 // import { push } from 'connected-react-router';
 import { PrimaryButton, TextInput } from '../components/UI';
 import '../assets/css/common.css';
-import { register } from '../reducks/troubleLists/operations';
+import { register } from '../reducks/idiaLists/operations';
 
 const IdiaForm = () => {
   const dispatch = useDispatch();
-  const [username, setUsername] = useState('');
-  const [age, setAge] = useState(0);
-  const [business, setBusiness] = useState('');
+  const [id, setId] = useState('');
+  const [trouble, setTrouble] = useState('');
   const [title, setTitle] = useState('');
-  const [backGround, setBackGround] = useState('');
+  const [username, setUsername] = useState('');
+  const [target, setTarget] = useState('');
   const [example, setExample] = useState('');
   const [remark, setRemark] = useState('');
 
   const [usernameError, setUsernameError] = useState('');
   const [titleError, setTitleError] = useState('');
-  const [backGroundError, setBackGroundError] = useState('');
-
-  const inputUsername = useCallback(
-    (event) => {
-      setUsername(event.target.value);
-    },
-    [setUsername]
-  );
-
-  const inputAge = useCallback(
-    (event) => {
-      setAge(event.target.value);
-    },
-    [setAge]
-  );
-
-  const inputBusiness = useCallback(
-    (event) => {
-      setBusiness(event.target.value);
-    },
-    [setBusiness]
-  );
+  const [exampleError, setExampleError] = useState('');
 
   const inputTitle = useCallback(
     (event) => {
@@ -47,11 +26,18 @@ const IdiaForm = () => {
     [setTitle]
   );
 
-  const inputBackGround = useCallback(
+  const inputUsername = useCallback(
     (event) => {
-      setBackGround(event.target.value);
+      setUsername(event.target.value);
     },
-    [setBackGround]
+    [setUsername]
+  );
+
+  const inputTarget = useCallback(
+    (event) => {
+      setTarget(event.target.value);
+    },
+    [setTarget]
   );
 
   const inputExample = useCallback(
@@ -69,8 +55,9 @@ const IdiaForm = () => {
   );
 
   useEffect(() => {
-    const param = window.location.pathname.split('idiaForm')[1].split('/')[1];
-    setTitle(decodeURI(param));
+    const param = window.location.pathname.split('idiaForm')[1].split('/');
+    setId(param[1]);
+    setTrouble(decodeURI(param[2]));
   }, []);
 
   const submit = (): void => {
@@ -78,24 +65,23 @@ const IdiaForm = () => {
     setUsernameError(userErrorMsg);
     const titleErrorMsg = !title ? '必須項目です' : '';
     setTitleError(titleErrorMsg);
-    const backGroundErrorMsg = !backGround ? '必須項目です' : '';
-    setBackGroundError(backGroundErrorMsg);
+    const exampleErrorMsg = !example ? '必須項目です' : '';
+    setExampleError(exampleErrorMsg);
 
-    if (userErrorMsg || titleErrorMsg || backGroundErrorMsg) {
+    if (userErrorMsg || titleErrorMsg || exampleErrorMsg) {
       alert('入力エラー');
       window.scrollTo(0, 0);
       return;
     }
-    dispatch(
-      register(username, age, business, title, backGround, example, remark)
-    );
+    dispatch(register(id, title, username, target, example, remark));
   };
   return (
     <div>
       <section className="container">
+        <h2>{trouble}</h2>
         <TextInput
           fullWidth
-          label="表題(必須)"
+          label="サービス表題(必須)"
           multiline={false}
           rows={1}
           value={title}
@@ -119,49 +105,25 @@ const IdiaForm = () => {
 
         <TextInput
           fullWidth
-          label="年齢"
-          multiline={false}
-          rows={1}
-          value={age}
-          required={false}
-          type="number"
-          error=""
-          onChange={inputAge}
-        />
-
-        <TextInput
-          fullWidth
-          label="職業"
-          multiline={false}
-          rows={1}
-          value={business}
-          required={false}
-          type="text"
-          error=""
-          onChange={inputBusiness}
-        />
-
-        <TextInput
-          fullWidth
-          label="背景(必須)"
+          label="ターゲット象"
           multiline
           rows={10}
-          value={backGround}
+          value={target}
           required={false}
           type="text"
-          error={backGroundError}
-          onChange={inputBackGround}
+          error=""
+          onChange={inputTarget}
         />
 
         <TextInput
           fullWidth
-          label="サービス例"
+          label="サービス例(必須)"
           multiline
           rows={10}
           value={example}
           required={false}
           type="text"
-          error=""
+          error={exampleError}
           onChange={inputExample}
         />
 
@@ -178,7 +140,7 @@ const IdiaForm = () => {
         />
 
         <div className="btn-container">
-          <PrimaryButton label="登録" onClick={submit} />
+          <PrimaryButton label="投稿" onClick={submit} />
         </div>
       </section>
     </div>

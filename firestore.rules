@@ -4,5 +4,8 @@ service cloud.firestore {
     match /troubles/{troubleId} {
       allow read, write, create, delete;
     }
+    match /idias/{ideaId} {
+      allow read, write, create, delete;
+    }
   }
 }

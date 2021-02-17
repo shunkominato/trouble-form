@@ -45,7 +45,10 @@ const Menu = () => {
         </CardContent>
       </Card>
 
-      <Card className={classes.root} onClick={() => console.log('sss')}>
+      <Card
+        className={classes.root}
+        onClick={() => dispatch(push('/idiaList'))}
+      >
         <CardContent>
           <Typography
             className={classes.title}

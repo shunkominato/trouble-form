@@ -7,6 +7,8 @@ import {
   SignIn,
   Menu,
   IdiaForm,
+  IdiaList,
+  IdiaDetail,
 } from './views';
 
 export const Path = {
@@ -23,7 +25,9 @@ const Router = () => {
         <Route exact path="/menu" component={Menu} />
         <Route exact path="/troubleList" component={TroubleList} />
         <Route exact path="/troubleList/detail/:id" component={TroubleDetail} />
-        <Route exact path="/idiaForm/:title" component={IdiaForm} />
+        <Route exact path="/idiaForm/:id/:title" component={IdiaForm} />
+        <Route exact path="/idiaList" component={IdiaList} />
+        <Route exact path="/idiaList/detail/:id" component={IdiaDetail} />
       </Switch>
     </>
   );

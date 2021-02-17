@@ -14,7 +14,7 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
-import { fetchTroubleLists } from '../reducks/troubleLists/operations';
+import { fetchIdiaLists } from '../reducks/idiaLists/operations';
 // import fetchTroubleLists from '../reducks/troubleLists/operations';
 import { RootState } from '../reducks/store';
 
@@ -49,15 +49,14 @@ const useStyles = makeStyles({
   },
 });
 
-const TroubleList = () => {
+const IdiaList = () => {
   const dispatch = useDispatch();
-  const troubles = useSelector((state: RootState) => state.troubles);
+  const idias = useSelector((state: RootState) => state.idias);
   const classes = useStyles();
 
   useEffect(() => {
-    dispatch(fetchTroubleLists());
+    dispatch(fetchIdiaLists());
   }, []);
-  console.log(troubles);
   return (
     <>
       <div>
@@ -66,24 +65,22 @@ const TroubleList = () => {
             <TableHead>
               <TableRow>
                 <StyledTableCell>タイトル</StyledTableCell>
-                <StyledTableCell align="right">投稿者名</StyledTableCell>
+                <StyledTableCell>投稿者名</StyledTableCell>
+                <StyledTableCell>悩み</StyledTableCell>
               </TableRow>
             </TableHead>
             <TableBody>
-              {troubles.troubles.map((trouble) => (
-                <StyledTableRow key={trouble.id}>
+              {idias.idias.map((idia) => (
+                <StyledTableRow key={idia.id}>
                   <StyledTableCell
                     component="th"
                     scope="row"
-                    onClick={() =>
-                      dispatch(push(`troubleList/detail/${trouble.id}`))
-                    }
+                    onClick={() => dispatch(push(`idiaList/detail/${idia.id}`))}
                   >
-                    {trouble.trouble}
+                    {idia.title}
                   </StyledTableCell>
-                  <StyledTableCell align="right">
-                    {trouble.username}
-                  </StyledTableCell>
+                  <StyledTableCell>{idia.username}</StyledTableCell>
+                  <StyledTableCell>{idia.trouble}</StyledTableCell>
                 </StyledTableRow>
               ))}
             </TableBody>
@@ -94,4 +91,4 @@ const TroubleList = () => {
   );
 };
 
-export default TroubleList;
+export default IdiaList;

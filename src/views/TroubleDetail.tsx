@@ -29,10 +29,10 @@ const TroubleDetail = () => {
     id: '',
     username: '',
     age: 0,
+    gender: '',
     business: '',
-    title: '',
+    trouble: '',
     backGround: '',
-    example: '',
     remark: '',
     created_at: '',
     updated_at: '',
@@ -53,24 +53,28 @@ const TroubleDetail = () => {
     <>
       <div className="container">
         <div>
-          <h2>{trouble.title}</h2>
+          <h2>{trouble.trouble}</h2>
         </div>
 
         <p>{`投稿者 : ${trouble.username}`}</p>
         <p>{`年齢 : ${trouble.age}`}</p>
+        <p>{`性別 : ${trouble.gender}`}</p>
         <p>{`職業 : ${trouble.business}`}</p>
+
+        <div>
+          <u>
+            <h3 className="datail__h3">悩み</h3>
+          </u>
+          <p>{trouble.trouble}</p>
+        </div>
+
         <div>
           <u>
             <h3 className="datail__h3">背景</h3>
           </u>
           <p>{trouble.backGround}</p>
         </div>
-        <div>
-          <u>
-            <h3 className="datail__h3">サービス例</h3>
-          </u>
-          <p>{trouble.example}</p>
-        </div>
+
         <div>
           <u>
             <h3 className="datail__h3">備考</h3>
@@ -81,7 +85,7 @@ const TroubleDetail = () => {
           <Button
             variant="outlined"
             color="primary"
-            onClick={() => dispatch(push(`/idiaForm/${trouble.title}`))}
+            onClick={() => dispatch(push(`/idiaForm/${id}/${trouble.trouble}`))}
           >
             ビジネスアイディア投稿
           </Button>
