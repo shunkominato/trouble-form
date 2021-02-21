@@ -15,6 +15,7 @@ export const register: ActionCreator<
 > = (
   troubleId: string,
   title: string,
+  trouble: string,
   username: string,
   target: string,
   example: string,
@@ -30,6 +31,7 @@ export const register: ActionCreator<
       id: ref.id,
       trouble_id: troubleId,
       title,
+      trouble,
       username,
       target,
       example,

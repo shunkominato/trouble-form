@@ -73,7 +73,7 @@ const IdiaForm = () => {
       window.scrollTo(0, 0);
       return;
     }
-    dispatch(register(id, title, username, target, example, remark));
+    dispatch(register(id, title, trouble, username, target, example, remark));
   };
   return (
     <div>
@@ -105,7 +105,7 @@ const IdiaForm = () => {
 
         <TextInput
           fullWidth
-          label="ターゲット象"
+          label="ターゲット像"
           multiline
           rows={10}
           value={target}
