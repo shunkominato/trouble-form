@@ -80,6 +80,9 @@ const From: React.FC = () => {
     }
     dispatch(register(username, age, gender, trouble, backGround, remark));
 
+    alert('ありがとうございます。\n投稿完了しました。');
+    window.scrollTo(0, 0);
+
     setUsername('');
     setAge(0);
     setTrouble('');
