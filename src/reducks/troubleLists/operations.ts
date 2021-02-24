@@ -38,20 +38,25 @@ export const register: ActionCreator<
     };
 
     await db.collection('troubles').doc(ref.id).set(data, { merge: true });
-    alert('投稿しました');
 
     const url =
-      'https://hooks.slack.com/services/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';
+      'https://hooks.slack.com/services/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';
     const payload = {
-      text: `名前: ${username}
-年齢: ${age}
-性別: ${gender}
-悩み: ${trouble}
-背景: ${backGround}
-備考: ${remark}`,
+      text: `【投稿者名】
+${username}
+【年齢】
+${age}
+【性別】
+${gender}
+【悩み】
+${trouble}
+【背景】
+${backGround}
+【備考】
+${remark}`,
     };
 
-    fetch(url, {
+    await fetch(url, {
       method: 'POST',
       body: JSON.stringify(payload),
     }).then(() => {

@@ -41,6 +41,30 @@ export const register: ActionCreator<
     };
 
     await db.collection('idias').doc(ref.id).set(data, { merge: true });
+    const url =
+      'https://hooks.slack.com/services/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';
+    const payload = {
+      text: `【投稿者名】
+${username}
+【悩み】
+${trouble}
+【表題】
+${title}
+【ターゲット像】
+${target}
+【サービス例】
+${example}
+【備考】
+${remark}`,
+    };
+
+    await fetch(url, {
+      method: 'POST',
+      body: JSON.stringify(payload),
+    }).then(() => {
+      dispatch(push('/'));
+    });
+
     alert('投稿しました');
     dispatch(push('/menu'));
   };
