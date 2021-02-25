@@ -65,7 +65,7 @@ const From: React.FC = () => {
     [setRemark]
   );
 
-  const submit = (): void => {
+  const submit = async (): Promise<void> => {
     const userErrorMsg = !username ? '必須項目です' : '';
     setUsernameError(userErrorMsg);
     const troubleErrorMsg = !trouble ? '必須項目です' : '';
@@ -78,9 +78,10 @@ const From: React.FC = () => {
       window.scrollTo(0, 0);
       return;
     }
-    dispatch(register(username, age, gender, trouble, backGround, remark));
+    await dispatch(
+      register(username, age, gender, trouble, backGround, remark)
+    );
 
-    alert('ありがとうございます。\n投稿完了しました。');
     window.scrollTo(0, 0);
 
     setUsername('');
