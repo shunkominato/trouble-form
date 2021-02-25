@@ -7,11 +7,12 @@ import { TroubleActionTypes, Trouble } from './types';
 import { RootState } from '../store';
 import { db, FirebaseTimeStamp } from '../../firebase';
 import { fetchTorablesAction } from './actions';
+import { FORM_ERROR, FORM_SUCCESS } from '../../common/messages/ui/FormResults';
 
 const troubleRef = db.collection('troubles');
 
 export const register: ActionCreator<
-  ThunkAction<void, RootState, undefined, TroubleActionTypes>
+  ThunkAction<Promise<void>, RootState, undefined, TroubleActionTypes>
 > = (
   username: string,
   age: number,
@@ -37,31 +38,37 @@ export const register: ActionCreator<
       updated_at: timestamp,
     };
 
-    await db.collection('troubles').doc(ref.id).set(data, { merge: true });
+    try {
+      await db.collection('troubl').doc(ref.id).set(data, { merge: true });
+      alert(FORM_SUCCESS);
+    } catch (e) {
+      console.log(e);
+      alert(FORM_ERROR);
+    }
 
-    const url =
-      'https://hooks.slack.com/services/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';
-    const payload = {
-      text: `【投稿者名】
-${username}
-【年齢】
-${age}
-【性別】
-${gender}
-【悩み】
-${trouble}
-【背景】
-${backGround}
-【備考】
-${remark}`,
-    };
+    //     const url =
+    //       'https://hooks.slack.com/services/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';
+    //     const payload = {
+    //       text: `【投稿者名】
+    // ${username}
+    // 【年齢】
+    // ${age}
+    // 【性別】
+    // ${gender}
+    // 【悩み】
+    // ${trouble}
+    // 【背景】
+    // ${backGround}
+    // 【備考】
+    // ${remark}`,
+    //     };
 
-    await fetch(url, {
-      method: 'POST',
-      body: JSON.stringify(payload),
-    }).then(() => {
-      dispatch(push('/'));
-    });
+    //     await fetch(url, {
+    //       method: 'POST',
+    //       body: JSON.stringify(payload),
+    //     }).then(() => {
+    dispatch(push('/'));
+    //     });
   };
 };
 
