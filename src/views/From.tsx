@@ -1,6 +1,5 @@
 import React, { useCallback, useState } from 'react';
 import { useDispatch } from 'react-redux';
-// import { push } from 'connected-react-router';
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
@@ -98,6 +97,7 @@ const From: React.FC = () => {
       alert(FORM_ERROR);
       return;
     }
+
     const url =
       'https://hooks.slack.com/services/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';
     const payload = {
