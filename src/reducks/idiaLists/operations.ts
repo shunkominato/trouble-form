@@ -22,7 +22,6 @@ export const register: ActionCreator<
   remark: string
 ) => {
   return async (dispatch: Dispatch) => {
-    console.log('komikomi');
     const timestamp = FirebaseTimeStamp.now();
 
     const ref = idiaRef.doc();
