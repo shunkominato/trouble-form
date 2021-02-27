@@ -1,5 +1,6 @@
 import { Action, ActionCreator } from 'redux';
 import { ThunkAction } from 'redux-thunk';
+import { errorHandle } from './errorHandle';
 
 export const slackWebhook: ActionCreator<
   ThunkAction<void, undefined, undefined, Action<any>>
@@ -11,8 +12,7 @@ export const slackWebhook: ActionCreator<
         body: JSON.stringify(payload),
       });
     } catch (e) {
-      console.log(e);
-      console.log('slackへの通知に失敗しました');
+      errorHandle(e, 'common slackWebhook');
     }
   };
 };
