@@ -20,35 +20,35 @@ const IdiaForm = () => {
   const [exampleError, setExampleError] = useState('');
 
   const inputTitle = useCallback(
-    (event) => {
+    (event: React.ChangeEvent<HTMLInputElement>) => {
       setTitle(event.target.value);
     },
     [setTitle]
   );
 
   const inputUsername = useCallback(
-    (event) => {
+    (event: React.ChangeEvent<HTMLInputElement>) => {
       setUsername(event.target.value);
     },
     [setUsername]
   );
 
   const inputTarget = useCallback(
-    (event) => {
+    (event: React.ChangeEvent<HTMLInputElement>) => {
       setTarget(event.target.value);
     },
     [setTarget]
   );
 
   const inputExample = useCallback(
-    (event) => {
+    (event: React.ChangeEvent<HTMLInputElement>) => {
       setExample(event.target.value);
     },
     [setExample]
   );
 
   const inputRemark = useCallback(
-    (event) => {
+    (event: React.ChangeEvent<HTMLInputElement>) => {
       setRemark(event.target.value);
     },
     [setRemark]
@@ -73,6 +73,7 @@ const IdiaForm = () => {
       window.scrollTo(0, 0);
       return;
     }
+
     dispatch(register(id, title, trouble, username, target, example, remark));
   };
   return (

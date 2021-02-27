@@ -6,14 +6,17 @@ import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
+import { push } from 'connected-react-router';
 import { PrimaryButton, TextInput } from '../components/UI';
 import '../assets/css/common.css';
 import { register } from '../reducks/troubleLists/operations';
+import { FORM_ERROR, FORM_SUCCESS } from '../common/messages/ui/FormResults';
+import { slackWebhook } from '../reducks/commons/operatirons';
 
 const From: React.FC = () => {
   const dispatch = useDispatch();
   const [username, setUsername] = useState('');
-  const [age, setAge] = useState(0);
+  const [age, setAge] = useState('0');
   const [gender, setGender] = useState('男');
   const [trouble, setTrouble] = useState('');
   const [backGround, setBackGround] = useState('');
@@ -24,42 +27,42 @@ const From: React.FC = () => {
   const [backGroundError, setBackGroundError] = useState('');
 
   const inputUsername = useCallback(
-    (event) => {
+    (event: React.ChangeEvent<HTMLInputElement>) => {
       setUsername(event.target.value);
     },
     [setUsername]
   );
 
   const inputAge = useCallback(
-    (event) => {
+    (event: React.ChangeEvent<HTMLInputElement>) => {
       setAge(event.target.value);
     },
     [setAge]
   );
 
   const inputGender = useCallback(
-    (event) => {
+    (event: React.ChangeEvent<HTMLInputElement>) => {
       setGender(event.target.value);
     },
     [setGender]
   );
 
   const inputBackGround = useCallback(
-    (event) => {
+    (event: React.ChangeEvent<HTMLInputElement>) => {
       setBackGround(event.target.value);
     },
     [setBackGround]
   );
 
   const inputTrouble = useCallback(
-    (event) => {
+    (event: React.ChangeEvent<HTMLInputElement>) => {
       setTrouble(event.target.value);
     },
     [setTrouble]
   );
 
   const inputRemark = useCallback(
-    (event) => {
+    (event: React.ChangeEvent<HTMLInputElement>) => {
       setRemark(event.target.value);
     },
     [setRemark]
@@ -78,17 +81,43 @@ const From: React.FC = () => {
       window.scrollTo(0, 0);
       return;
     }
-    await dispatch(
-      register(username, age, gender, trouble, backGround, remark)
-    );
 
-    window.scrollTo(0, 0);
+    try {
+      await dispatch(
+        register(username, age, gender, trouble, backGround, remark)
+      );
 
-    setUsername('');
-    setAge(0);
-    setTrouble('');
-    setBackGround('');
-    setRemark('');
+      window.scrollTo(0, 0);
+
+      setUsername('');
+      setAge('0');
+      setTrouble('');
+      setBackGround('');
+      setRemark('');
+    } catch (e) {
+      alert(FORM_ERROR);
+      return;
+    }
+    const url =
+      'https://hooks.slack.com/services/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';
+    const payload = {
+      text: `【投稿者名】
+      ${username}
+      【年齢】
+      ${age}
+      【性別】
+      ${gender}
+      【悩み】
+      ${trouble}
+      【背景】
+      ${backGround}
+      【備考】
+      ${remark}`,
+    };
+
+    await dispatch(slackWebhook(url, payload));
+    alert(FORM_SUCCESS);
+    dispatch(push('/'));
   };
 
   return (
