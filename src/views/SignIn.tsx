@@ -4,7 +4,7 @@ import { push } from 'connected-react-router';
 import '../assets/css/common.css';
 import { PrimaryButton, TextInput } from '../components/UI';
 
-const SignIn = () => {
+const SignIn: React.FC = () => {
   const dispatch = useDispatch();
   const [id, setId] = useState('');
   const [pass, setPass] = useState(0);

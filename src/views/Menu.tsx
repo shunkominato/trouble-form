@@ -24,7 +24,7 @@ const useStyles = makeStyles({
   },
 });
 
-const Menu = () => {
+const Menu: React.FC = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
 

@@ -49,7 +49,7 @@ const useStyles = makeStyles({
   },
 });
 
-const TroubleList = () => {
+const TroubleList: React.FC = () => {
   const dispatch = useDispatch();
   const troubles = useSelector((state: RootState) => state.troubles);
   const classes = useStyles();

@@ -5,7 +5,7 @@ import { PrimaryButton, TextInput } from '../components/UI';
 import '../assets/css/common.css';
 import { register } from '../reducks/idiaLists/operations';
 
-const IdiaForm = () => {
+const IdiaForm: React.FC = () => {
   const dispatch = useDispatch();
   const [id, setId] = useState('');
   const [trouble, setTrouble] = useState('');

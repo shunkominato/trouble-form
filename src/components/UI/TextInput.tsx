@@ -15,7 +15,7 @@ type Props = {
   onChange: (event: any) => void;
 };
 
-const TextInput = (props: Props) => {
+const TextInput = React.memo((props: Props) => {
   const {
     fullWidth,
     label,
@@ -45,6 +45,6 @@ const TextInput = (props: Props) => {
       />
     </div>
   );
-};
+});
 
 export default TextInput;

@@ -18,7 +18,7 @@ import { Trouble } from '../reducks/troubleLists/types';
 //   })
 // );
 
-const TroubleDetail = () => {
+const TroubleDetail: React.FC = () => {
   // const classes = useStyles();
   const dispatch = useDispatch();
   const id = window.location.pathname

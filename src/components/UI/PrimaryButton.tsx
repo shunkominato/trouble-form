@@ -17,7 +17,7 @@ type Props = {
   onClick: () => void;
 };
 
-const PrimaryButton = (props: Props) => {
+const PrimaryButton = React.memo((props: Props) => {
   const { label, onClick } = props;
   const classes = useStyles();
   return (
@@ -27,6 +27,6 @@ const PrimaryButton = (props: Props) => {
       </Button>
     </div>
   );
-};
+});
 
 export default PrimaryButton;

@@ -7,7 +7,7 @@ import { db } from '../firebase';
 import '../assets/css/common.css';
 import { Idia } from '../reducks/idiaLists/types';
 
-const IdiaDetail = () => {
+const IdiaDetail: React.FC = () => {
   // const dispatch = useDispatch();
   // const id = window.location.pathname.split('idia/detail')[1].split('/')[1];
   const id = window.location.pathname.split('idiaList/detail')[1].split('/')[1];
