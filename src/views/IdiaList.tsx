@@ -49,7 +49,7 @@ const useStyles = makeStyles({
   },
 });
 
-const IdiaList = () => {
+const IdiaList: React.FC = () => {
   const dispatch = useDispatch();
   const idias = useSelector((state: RootState) => state.idias);
   const classes = useStyles();

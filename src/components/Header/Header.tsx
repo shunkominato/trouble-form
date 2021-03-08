@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-const Header = () => {
+const Header = React.memo(() => {
   const dispatch = useDispatch();
   const classes = useStyles();
   const [open, setOpen] = useState(false);
@@ -58,6 +58,6 @@ const Header = () => {
       <ClosableDrawer open={open} onClose={handleDrawerTggle} />
     </div>
   );
-};
+});
 
 export default Header;
